@@ -1,0 +1,31 @@
+[[servers]]
+host = "bwds1.ncsa.illinois.edu"
+port = 636
+use_ssl = true
+start_tls = false
+ssl_skip_verify = false
+root_ca_cert = "/etc/grafana/certs/bwds1.ncsa.illinois.edu.crt"
+
+bind_dn = "cn=%s,o=users,dc=ncsa,dc=illinois,dc=edu"
+
+#search_filter = "(&(objectClass=person)(!(memberOf=cn=all_disabled_usr,ou=Groups,dc=ncsa,dc=illinois,dc=edu))(uid=%s))"
+search_filter = "(cn=%s)"
+
+search_base_dns = ["ou=people,dc=ncsa,dc=illinois,dc=edu"]
+
+[servers.attributes]
+name = "givenName"
+surname = "sn"
+username = "uid"
+member_of = "memberOf"
+email =  "mail"
+
+[[servers.group_mappings]]
+group_dn = "cn=bw_admin,ou=Groups,dc=ncsa,dc=illinois,dc=edu"
+org_role = "Admin"
+grafana_admin = true
+
+[[servers.group_mappings]]
+# If you want to match all (or no ldap groups) then you can use wildcard
+group_dn = "*"
+org_role = "Viewer"
