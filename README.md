@@ -7,7 +7,7 @@ cp -a grafana_container/grafana {storage dir}
 ### to run in docker directly
 docker run –rm -d --network host –name Grafana  -v/etc/localtime:/etc/localtime -v {storage dir}/grafana:/var/lib/grafana -v {storage dir}/grafana/etc/grafana:/etc/grafana  grafana/grafana 
 
-###to use singularity
+### to use singularity
 singularity build grafana.sif docker://grafana/grafana  
 midir {storage dir}/images    
 cp grafana.sif <storage dir>/images 
